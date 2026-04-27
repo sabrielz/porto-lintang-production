@@ -3,6 +3,7 @@ import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingSocialLinks } from "@/components/shared/FloatingSocialLinks";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
+        <FloatingSocialLinks />
         <Footer />
       </body>
     </html>
