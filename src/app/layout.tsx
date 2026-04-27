@@ -15,6 +15,8 @@ const syne = Syne({
   subsets: ["latin"],
 });
 
+import { SmoothScrolling } from "@/components/shared/SmoothScrolling";
+
 export const metadata: Metadata = {
   title: "Lintang Production | Vendor Multimedia & Lighting",
   description: "Penyedia jasa vendor multimedia, lighting panggung, videotron, dan dokumentasi acara profesional.",
@@ -26,15 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${inter.variable} ${syne.variable} h-full antialiased scroll-smooth`}>
+    <html lang="id" className={`${inter.variable} ${syne.variable} h-full antialiased`}>
       <body className="font-body min-h-screen flex flex-col pt-16">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <FloatingSocialLinks />
-        <Footer />
+        <SmoothScrolling>
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <FloatingSocialLinks />
+          <Footer />
+        </SmoothScrolling>
       </body>
     </html>
   );
 }
+
