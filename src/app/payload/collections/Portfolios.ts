@@ -58,5 +58,42 @@ export const Portfolios: CollectionConfig = {
       type: 'date',
       required: true,
     },
+    {
+      name: 'clientName',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description: 'Name of the client or company.'
+      }
+    },
+    {
+      name: 'equipmentUsed',
+      type: 'array',
+      fields: [
+        {
+          name: 'item',
+          type: 'text',
+          required: true,
+        }
+      ],
+      admin: {
+        description: 'List of key equipment used.',
+      }
+    },
+    {
+      name: 'gallery',
+      type: 'array',
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        }
+      ],
+      admin: {
+        description: 'Optional additional images for the portfolio item.',
+      }
+    },
   ],
 }
