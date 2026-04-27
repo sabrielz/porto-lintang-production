@@ -16,17 +16,33 @@ const syne = Syne({
 });
 
 import { SmoothScrolling } from "@/components/shared/SmoothScrolling";
+import { getPayload } from "payload";
+import configPromise from '@payload-config';
 
 export const metadata: Metadata = {
   title: "Lintang Production | Vendor Multimedia & Lighting",
   description: "Penyedia jasa vendor multimedia, lighting panggung, videotron, dan dokumentasi acara profesional.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch Social Media globally
+  let socialMediaLinks: any[] = [];
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const { docs } = await payload.find({
+      collection: 'social-media',
+      where: { isActive: { equals: true } },
+      limit: 10
+    });
+    socialMediaLinks = docs;
+  } catch (e) {
+    console.error("Payload CMS is not yet initialized.", e);
+  }
+
   return (
     <html lang="id" className={`${inter.variable} ${syne.variable} h-full antialiased`}>
       <body className="font-body min-h-screen flex flex-col pt-16">
@@ -35,7 +51,7 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
-          <FloatingSocialLinks />
+          <FloatingSocialLinks links={socialMediaLinks} />
           <Footer />
         </SmoothScrolling>
       </body>

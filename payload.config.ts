@@ -4,12 +4,12 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { Users } from './payload/collections/Users'
-import { Media } from './payload/collections/Media'
-import { Portfolios } from './payload/collections/Portfolios'
-import { SocialMedia } from './payload/collections/SocialMedia'
-import { Partners } from './payload/collections/Partners'
-import { SiteSettings } from './payload/globals/SiteSettings'
+import { Users } from './src/app/payload/collections/Users'
+import { Media } from './src/app/payload/collections/Media'
+import { Portfolios } from './src/app/payload/collections/Portfolios'
+import { SocialMedia } from './src/app/payload/collections/SocialMedia'
+import { Partners } from './src/app/payload/collections/Partners'
+import { SiteSettings } from './src/app/payload/globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,7 +18,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: {
-      baseDir: path.resolve(dirname),
+      baseDir: path.resolve(dirname, 'src/app/(payload)/admin'),
     },
   },
   collections: [
