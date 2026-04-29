@@ -48,4 +48,6 @@ export default buildConfig({
       authToken: process.env.DATABASE_AUTH_TOKEN, // Example for remote Turso DB
     },
   }),
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  debug: true,
 })
