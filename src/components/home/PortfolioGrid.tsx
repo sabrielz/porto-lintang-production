@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-export function PortfolioGrid({ portfolios = [] }: { portfolios?: any[] }) {
+export function PortfolioGrid({ portfolios = [], previewMode = false }: { portfolios?: any[], previewMode?: boolean }) {
   const [activeTab, setActiveTab] = useState("semua");
 
   const tabs = [
@@ -19,7 +20,9 @@ export function PortfolioGrid({ portfolios = [] }: { portfolios?: any[] }) {
     ? portfolios 
     : portfolios.filter(p => p.category === activeTab);
 
-  const displayItems = portfolios.length > 0 ? filteredPortfolios : [1, 2, 3, 4, 5, 6];
+  const displayItems = previewMode 
+    ? (portfolios.length > 0 ? filteredPortfolios.slice(0, 3) : [1, 2, 3]) 
+    : (portfolios.length > 0 ? filteredPortfolios : [1, 2, 3, 4, 5, 6]);
 
   return (
     <section id="portfolio" className="py-24 bg-background relative border-t border-white/5">
@@ -34,21 +37,23 @@ export function PortfolioGrid({ portfolios = [] }: { portfolios?: any[] }) {
             </p>
           </div>
           
-          <div className="flex flex-wrap gap-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeTab === tab.id
-                    ? "bg-white text-background shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          {!previewMode && (
+            <div className="flex flex-wrap gap-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? "bg-white text-background shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -61,9 +66,10 @@ export function PortfolioGrid({ portfolios = [] }: { portfolios?: any[] }) {
             const formatCategory = (cat: string) => cat.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
 
             return (
-              <div 
+              <Link 
+                href={isDummy ? "/portfolio" : `/portfolio/${item.slug}`}
                 key={isDummy ? item : item.id} 
-                className="group relative rounded-3xl overflow-hidden border border-white/10 break-inside-avoid bg-white/5 transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
+                className="block group relative rounded-3xl overflow-hidden border border-white/10 break-inside-avoid bg-white/5 transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
               >
                 <div className={`w-full ${idx % 2 === 0 ? "h-64" : "h-96"} bg-neutral-900 relative`}>
                   
@@ -91,10 +97,19 @@ export function PortfolioGrid({ portfolios = [] }: { portfolios?: any[] }) {
                     <p className="text-sm text-white/60">Jakarta, {eventDate}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
+        
+        {previewMode && (
+          <div className="mt-16 text-center">
+            <Link href="/portfolio" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+              Jelajahi Semua Portofolio
+              <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

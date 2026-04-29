@@ -16,6 +16,9 @@ const syne = Syne({
 });
 
 import { SmoothScrolling } from "@/components/shared/SmoothScrolling";
+import { PageTransition } from "@/components/shared/PageTransition";
+import { CustomCursor } from "@/components/shared/CustomCursor";
+import { Toaster } from "sonner";
 import { getPayload } from "payload";
 import configPromise from '@payload-config';
 
@@ -45,13 +48,17 @@ export default async function RootLayout({
 
   return (
     <html lang="id" className={`${inter.variable} ${syne.variable} h-full antialiased`}>
-      <body className="font-body min-h-screen flex flex-col pt-16">
+      <body className="font-body min-h-screen flex flex-col pt-16 cursor-default">
+        <CustomCursor />
         <SmoothScrolling>
           <Navbar />
-          <main className="flex-grow">
-            {children}
+          <main className="flex-grow flex flex-col">
+            <PageTransition>
+              {children}
+            </PageTransition>
           </main>
           <FloatingSocialLinks links={socialMediaLinks} />
+          <Toaster theme="dark" position="bottom-right" richColors />
           <Footer />
         </SmoothScrolling>
       </body>

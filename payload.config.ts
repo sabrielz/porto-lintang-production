@@ -9,7 +9,10 @@ import { Media } from './src/app/payload/collections/Media'
 import { Portfolios } from './src/app/payload/collections/Portfolios'
 import { SocialMedia } from './src/app/payload/collections/SocialMedia'
 import { Partners } from './src/app/payload/collections/Partners'
+import { Services } from './src/app/payload/collections/Services'
+import { ContactMessages } from './src/app/payload/collections/ContactMessages'
 import { SiteSettings } from './src/app/payload/globals/SiteSettings'
+import { SEO } from './src/app/payload/globals/SEO'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,10 +29,13 @@ export default buildConfig({
     Media,
     Portfolios,
     SocialMedia,
-    Partners
+    Partners,
+    Services,
+    ContactMessages
   ],
   globals: [
-    SiteSettings
+    SiteSettings,
+    SEO
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'YOUR_PAYLOAD_SECRET_KEY',

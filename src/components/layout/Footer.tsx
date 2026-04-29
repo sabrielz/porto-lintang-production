@@ -8,11 +8,11 @@ export function Footer() {
           <span className="font-heading font-bold text-lg text-white">LINTANG<span className="text-primary">.PRO</span></span>
           <span className="text-white/50 text-sm">© {new Date().getFullYear()}</span>
         </div>
-        
+
         <div className="text-sm text-white/50 text-center md:text-right">
           Designed & Engineered by{" "}
           <Link
-            href="https://github.com/sabriel"
+            href="https://github.com/sabrielz"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-primary transition-colors hover:underline"

@@ -5,47 +5,11 @@ import { ArrowRight, Video } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const DustParticles = () => {
-  const [particles, setParticles] = useState<any[]>([]);
-
-  useEffect(() => {
-    // Generate static values only once on the client to avoid hydration mismatch
-    const newParticles = Array.from({ length: 40 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 3 + 1,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      duration: Math.random() * 30 + 30, // 30s to 60s very slow
-      delay: Math.random() * 10,
-    }));
-    setParticles(newParticles);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-white/20"
-          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` } as any}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, Math.random() * 60 - 30, 0],
-            opacity: [0, 0.4, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+import { ThreeBackground } from "@/components/shared/ThreeBackground";
+import { Play } from "lucide-react";
 
 export function HeroSection({ headline, subheadline }: { headline?: string, subheadline?: string }) {
+  const [showreelOpen, setShowreelOpen] = useState(false);
   // Variants for fade-up reveal animation
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -64,18 +28,10 @@ export function HeroSection({ headline, subheadline }: { headline?: string, subh
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
-      {/* Background Video Placeholder & Particles */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-background/80 md:bg-background/60 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-        <DustParticles />
-        {/* Intentionally left blank for <video> payload injection later. */}
-        {/* <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-          <source src="/placeholder-video.mp4" type="video/mp4" />
-        </video> */}
-        <div className="w-full h-full object-cover flex items-center justify-center opacity-20">
-          <Video size={120} className="text-primary" />
-        </div>
+      {/* Background 3D Particles */}
+      <div className="absolute inset-0 z-0 bg-neutral-950">
+        <ThreeBackground />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Content */}
@@ -105,17 +61,45 @@ export function HeroSection({ headline, subheadline }: { headline?: string, subh
             {subheadline || "Lintang Production (LP) menghadirkan dokumentasi acara, live streaming profesional, lighting, dan animasi videotron B2B berkualitas premium."}
           </motion.p>
           
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
-            <Link href="#portfolio" className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 mt-4">
+            <Link href="/portfolio" className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-primary rounded-full hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)]">
               Lihat Portofolio
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
-            <Link href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-white/20 rounded-lg hover:bg-white/10 transition-colors backdrop-blur-sm">
+            
+            <button onClick={() => setShowreelOpen(true)} className="group inline-flex items-center justify-center text-base font-medium text-white hover:text-primary transition-colors">
+              <div className="w-14 h-14 rounded-full border-2 border-white/20 group-hover:border-primary/50 flex items-center justify-center mr-4 bg-white/5 backdrop-blur-sm group-hover:bg-primary/10 transition-all">
+                <Play className="w-5 h-5 ml-1" fill="currentColor" />
+              </div>
+              Play Showreel
+            </button>
+            
+            <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm sm:ml-4">
               Hubungi Kami
             </Link>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Showreel Modal */}
+      {showreelOpen && (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6">
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setShowreelOpen(false)} />
+          <div className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.2)] bg-black z-10 animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setShowreelOpen(false)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-red-500 transition-colors z-20"
+            >
+              ✕
+            </button>
+            <iframe 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" // Placeholder video
+              className="w-full h-full" 
+              allow="autoplay; fullscreen"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

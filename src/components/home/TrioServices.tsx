@@ -82,6 +82,13 @@ export function TrioServices() {
             </div>
           </GlowCard>
         </div>
+        
+        <div className="mt-16 text-center">
+          <a href="/services" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            Jelajahi Paket Layanan
+            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
       </div>
     </section>
   );

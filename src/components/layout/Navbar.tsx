@@ -18,9 +18,9 @@ export function Navbar() {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <Link href="#services" className="hover:text-primary transition-colors text-sm font-medium">Services</Link>
-              <Link href="#portfolio" className="hover:text-primary transition-colors text-sm font-medium">Portfolio</Link>
-              <Link href="#contact" className="hover:text-primary transition-colors text-sm font-medium">Contact</Link>
+              <Link href="/services" className="hover:text-primary transition-colors text-sm font-medium">Services</Link>
+              <Link href="/portfolio" className="hover:text-primary transition-colors text-sm font-medium">Portfolio</Link>
+              <Link href="/about" className="hover:text-primary transition-colors text-sm font-medium">About</Link>
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -39,9 +39,9 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-background border-b border-white/10">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="#services" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Services</Link>
-            <Link href="#portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Portfolio</Link>
-            <Link href="#contact" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Contact</Link>
+            <Link href="/services" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Services</Link>
+            <Link href="/portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Portfolio</Link>
+            <Link href="/about" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">About</Link>
           </div>
         </div>
       )}

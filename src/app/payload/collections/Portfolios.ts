@@ -95,5 +95,12 @@ export const Portfolios: CollectionConfig = {
         description: 'Optional additional images for the portfolio item.',
       }
     },
+    {
+      name: 'testimonial',
+      type: 'richText',
+      admin: {
+        description: 'Optional testimonial or quote from the client.',
+      }
+    },
   ],
 }
