@@ -44,7 +44,7 @@ export default buildConfig({
   },
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URI || 'file:./payload.db',
+      url: process.env.DATABASE_URL || 'file:./payload.db',
       authToken: process.env.DATABASE_AUTH_TOKEN, // Example for remote Turso DB
     },
   }),
