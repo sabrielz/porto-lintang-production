@@ -21,6 +21,7 @@ export function Navbar() {
               <Link href="/services" className="hover:text-primary transition-colors text-sm font-medium">Services</Link>
               <Link href="/portfolio" className="hover:text-primary transition-colors text-sm font-medium">Portfolio</Link>
               <Link href="/about" className="hover:text-primary transition-colors text-sm font-medium">About</Link>
+              <Link href="/contact" className="hover:text-primary transition-colors text-sm font-medium">Contact</Link>
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -42,6 +43,7 @@ export function Navbar() {
             <Link href="/services" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Services</Link>
             <Link href="/portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Portfolio</Link>
             <Link href="/about" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">About</Link>
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="block hover:bg-white/5 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Contact</Link>
           </div>
         </div>
       )}
