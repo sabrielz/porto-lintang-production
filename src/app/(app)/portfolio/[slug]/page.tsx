@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     
     if (!docs || docs.length === 0) return { title: "Not Found" };
     return { 
-      title: \`\${docs[0].title} | Lintang Production\`,
-      description: \`Detail proyek dan dokumentasi event \${docs[0].title} oleh Lintang Production.\`
+      title: `${docs[0].title} | Lintang Production`,
+      description: `Detail proyek dan dokumentasi event ${docs[0].title} oleh Lintang Production.`
     };
   } catch (e) {
     return { title: "Portfolio" };
